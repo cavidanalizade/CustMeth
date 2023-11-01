@@ -1,0 +1,61 @@
+TASK1//////////
+
+
+CREATE DATABASE BB205;
+
+CREATE TABLE Students (
+    Name VARCHAR(50) NOT NULL,
+    Surname VARCHAR(50) DEFAULT 'XXX',
+    Age INT CHECK (Age >= 16),
+    AvgPoint INT CHECK (AvgPoint >= 0 AND AvgPoint <= 100)
+);
+
+SELECT * FROM Students WHERE AvgPoint > 51;
+
+SELECT * FROM Students WHERE AvgPoint > 51 AND AvgPoint < 90;
+
+SELECT * FROM Students WHERE Name LIKE 'A%n';
+
+SELECT * FROM Students WHERE AvgPoint < 51 AND Age > 20;
+
+INSERT INTO  Students([Name] , [Surname] , [Age] , [AvgPoint])
+VALUES('JAVIDAN' 'ALIZADA' , 19 , 78.7)
+
+
+
+TASK2////////////////////
+
+CREATE DATABASE Department;
+
+USE Department;
+CREATE TABLE Employees (
+    Id INT PRIMARY KEY IDENTITY(1,1),
+    Name VARCHAR(50) CHECK (LEN(Name) >= 3),
+    Surname VARCHAR(50) CHECK (LEN(Surname) >= 3),
+    Salary FLOAT CHECK (Salary >= 200),
+    Degree NVARCHAR(10) CHECK (Degree IN ('junior', 'middle', 'senior'))
+);
+
+SELECT * FROM Employees WHERE Salary < 400;
+
+SELECT CONCAT(Name, ' ', Surname) AS Fullname FROM Employees;
+
+SELECT Id, CONCAT(Name, ' ', Surname) AS Fullname, Salary FROM Employees;
+
+SELECT * FROM Employees WHERE Degree = 'junior';
+
+SELECT TOP 1 * FROM Employees ORDER BY Salary DESC;
+
+SELECT TOP 1 * FROM Employees ORDER BY Salary;
+
+SELECT AVG(Salary) AS Ortalama_Maas FROM Employees;
+
+SELECT * FROM Employees WHERE Salary > (SELECT AVG(Salary) FROM Employees);
+
+SELECT * FROM Employees WHERE Surname LIKE '%ov' OR Surname LIKE '%ova';
+
+INSERT INTO Employees (Name, Surname, Salary, Degree) 
+VALUES 
+('John', 'Doe', 300, 'senior'),
+('Alice', 'Smith', 250, 'middle'),
+('Emily', 'Johnson', 400, 'junior');
